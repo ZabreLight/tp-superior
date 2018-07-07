@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import HomeLayout from './layout'
 
 
-const GB = 2**30;
-const MB = 2**20;
-const KB = 2**10;
+const GB = 2**20;
+const MB = 2**10;
 
-const ecuacion = t => 3*GB - 2*KB * 2*t - 512*KB * 100*t - 2*MB;
+const ecuacion = t => 3*GB - 2 * 2**t - 51200*t - 2*MB;
+
+const derivada = t => -2 * 2**t * Math.log(2) - 51200;
+
+const ecNewtonRaphson = xn => xn - (ecuacion(xn) / derivada(xn)); 
 
 const data = [
   {
@@ -34,7 +37,9 @@ class HomeContainer extends Component {
 
   }
 
-  handleNewtonRaphson() {
+  handleNewtonRaphson( i = 0, xnAnterior = 0) {               // Intervalo []
+    const resultado = ecNewtonRaphson(xnAnterior);
+
 
   }
 
