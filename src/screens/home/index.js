@@ -1,33 +1,9 @@
 import React, { Component } from 'react';
-import HomeLayout from './layout'
-
-
-const GB = 2**20;
-const MB = 2**10;
-
-const ecuacion = t => 3*GB - 2 * 2**t - 51200*t - 2*MB;
-
-const derivada = t => -2 * 2**t * Math.log(2) - 51200;
-
-const ecNewtonRaphson = xn => xn - (ecuacion(xn) / derivada(xn)); 
-
-const data = [
-  {
-    iteracion: 1,
-    xn: ecuacion(0),
-    xnAnterior: 0,
-    error: 0
-  },
-  {
-    iteracion: 2,
-    xn: ecuacion(1),
-    xnAnterior: ecuacion(0),
-    error: Math.abs(ecuacion(1) - ecuacion(0))
-  }
-]
+import HomeLayout from './layout';
+import { metodoNewtonRaphson } from './utils'
 
 class HomeContainer extends Component {
- state = { data }
+ state = { data: [] };
 
   handleBiseccion() {
 
@@ -37,10 +13,9 @@ class HomeContainer extends Component {
 
   }
 
-  handleNewtonRaphson( i = 0, xnAnterior = 0) {               // Intervalo []
-    const resultado = ecNewtonRaphson(xnAnterior);
-
-
+  handleNewtonRaphson = () => {
+    const data = metodoNewtonRaphson();
+    this.setState({ data });
   }
 
   render() {
