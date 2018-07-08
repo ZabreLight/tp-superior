@@ -10,7 +10,8 @@ class HomeContainer extends Component {
   }
 
   handlePuntoFijo() {
-
+    const data = metodoPuntoFijo();
+    this.setState({ data });
   }
 
   handleNewtonRaphson = () => {
