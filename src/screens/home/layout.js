@@ -19,7 +19,7 @@ function HomeLayout({handleBiseccion, handlePuntoFijo, handleNewtonRaphson, data
           <button className="my-button" onClick={handlePuntoFijo}>PUNTO FIJO</button>
           <button className="my-button" onClick={handleNewtonRaphson}>NEWTON RAPHSON</button>
         </div>
-        <ReactTable data={data} columns={columns} />
+        <ReactTable data={data} columns={columns} defaultPageSize={10} />
       </div>
     );
 }
