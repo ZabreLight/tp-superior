@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import HomeLayout from './layout';
-import { metodoNewtonRaphson } from './utils'
+import {metodoBiseccion, metodoNewtonRaphson, metodoPuntoFijo} from './utils';
+
 
 class HomeContainer extends Component {
  state = { data: [] };
 
-  handleBiseccion() {
-
+  handleBiseccion = () => {
+    const data = metodoBiseccion();
+    this.setState({ data: data });
   }
 
   handlePuntoFijo() {

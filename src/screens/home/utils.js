@@ -2,6 +2,9 @@ const GB = 2**20;
 const MB = 2**10;
 
 const ecuacion = t => 3*GB - 2 * 2**t - 51200*t - 2*MB;
+const ecuacion2 = t => Math.E**t - 4 + t;
+
+
 
 const derivada = t => -2 * 2**t * Math.log(2) - 51200;
 
@@ -38,3 +41,29 @@ export function metodoPuntoFijo(iteracion = 0, xnAnterior = 20.5, resultados = [
  2. g(x) es continua en el intervalo y el modulo de su derivada es menor a uno por lo que converge
  3. Criterio de paro: Error relativo Con un error menor a 10**(-5)
 */
+
+// iteracion = 0, extremoInicial = 20, extremoFinal = 21, xnAnterior = 0, resultados = []
+export function metodoBiseccion(iteracion = 0, extremoInicial = 1, extremoFinal = 2, xnAnterior = 0, resultados = []) {
+    const xn = (extremoInicial + extremoFinal) / 2; //biseccion
+    const fa = ecuacion2(extremoInicial);
+    const fXn = ecuacion2(xn);
+    const error = Math.abs(fXn);
+    const resultado = {xn, iteracion, xnAnterior, error};
+    resultados.push(resultado);
+    if (error > 10**(-5)) {
+        var nuevoExtremoInicial;
+        var nuevoExtremoFinal;
+
+        if(Math.sign(fXn) === Math.sign(fa)) {
+            nuevoExtremoInicial = xn;
+            nuevoExtremoFinal = extremoFinal;
+        } else {
+            nuevoExtremoInicial = extremoInicial;
+            nuevoExtremoFinal = xn;
+        }
+
+        return metodoBiseccion(iteracion + 1, nuevoExtremoInicial, nuevoExtremoFinal, xn, resultados);
+    }
+
+    return resultados;
+}
