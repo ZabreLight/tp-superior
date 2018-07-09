@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HomeLayout from './layout';
-import { metodoNewtonRaphson } from './utils'
+import { metodoNewtonRaphson, metodoPuntoFijo } from './utils'
 
 class HomeContainer extends Component {
  state = { data: [] };
@@ -9,7 +9,7 @@ class HomeContainer extends Component {
 
   }
 
-  handlePuntoFijo() {
+  handlePuntoFijo = () => {
     const data = metodoPuntoFijo();
     this.setState({ data });
   }
