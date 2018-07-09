@@ -1,3 +1,5 @@
+import {columns, columnsBiseccion} from './constants';
+
 const GB = 2**20;
 const MB = 2**10;
 
@@ -15,7 +17,7 @@ export function metodoNewtonRaphson(iteracion = 0, xnAnterior = 20.5, resultados
     const resultado = { xn, iteracion, xnAnterior, error}
     resultados.push(resultado);
     if (error > 10**(-5)) return metodoNewtonRaphson(iteracion + 1, xn, resultados);
-    return resultados;
+    return {columns: columns, data:resultados};
 }
 
 /* PASOS NEWTON RAPHSON
@@ -30,7 +32,7 @@ export function metodoPuntoFijo(iteracion = 0, xnAnterior = 20.5, resultados = [
     const resultado = { xn, iteracion, xnAnterior, error}
     resultados.push(resultado);
     if (error > 10**(-5)) return metodoPuntoFijo(iteracion + 1, xn, resultados);
-    return resultados;
+    return {columns: columns, data:resultados};
 }
 
 /* PASOS PUNTO FIJO
@@ -41,12 +43,14 @@ export function metodoPuntoFijo(iteracion = 0, xnAnterior = 20.5, resultados = [
 
 
 export function metodoBiseccion(iteracion = 0, extremoInicial = 20, extremoFinal = 21, xnAnterior = 0, resultados = []) {
-    const xn = (extremoInicial + extremoFinal) / 2; //biseccion
+    const xn = (extremoInicial + extremoFinal) / 2;
     const fa = ecuacion(extremoInicial);
+    const fb = ecuacion(extremoFinal);
     const fXn = ecuacion(xn);
     const error = Math.abs(fXn);
-    const resultado = {xn, iteracion, xnAnterior, error};
-    resultados.push(resultado);
+    // resultados.push({xn, iteracion, xnAnterior, error});
+    resultados.push({iteracion, extremoInicial, extremoFinal, xn, fa, fb,fXn, error, xnAnterior })
+
     if (error > 10**(-5)) {
         var nuevoExtremoInicial;
         var nuevoExtremoFinal;
@@ -62,5 +66,10 @@ export function metodoBiseccion(iteracion = 0, extremoInicial = 20, extremoFinal
         return metodoBiseccion(iteracion + 1, nuevoExtremoInicial, nuevoExtremoFinal, xn, resultados);
     }
 
-    return resultados;
+    return {columns: columnsBiseccion, data: resultados};
 }
+
+//PASOS BISECCION
+//1. Determinar intervalo donde varie el signo de f(x) [20,21]
+//2. Hallar Xn (a + b)/2
+//3. Criterio de paro: Valor cercano a 0, con un error menor a 10**(-5)
