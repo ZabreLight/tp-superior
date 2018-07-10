@@ -7,7 +7,7 @@ const ecuacion = t => 3*GB - 2 * 2**t - 51200*t - 2*MB;
 
 const derivada = t => -2 * 2**t * Math.log(2) - 51200;
 
-const despeje = t => (3*GB - 2 * 2**t - 2*MB) / 51200;
+const despeje = t => Math.log((3*GB - 51200*t - 2*MB) / 2) / Math.log(2);
 
 const ecNewtonRaphson = xn => xn - (ecuacion(xn) / derivada(xn));
 

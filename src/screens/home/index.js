@@ -3,7 +3,6 @@ import HomeLayout from './layout';
 import {metodoBiseccion, metodoNewtonRaphson, metodoPuntoFijo} from './utils';
 import {columns} from './constants';
 
-
 class HomeContainer extends Component {
  state = {
      columns: columns,
@@ -15,9 +14,11 @@ class HomeContainer extends Component {
     this.setState({ columns: columns, data: data });
   };
 
+
   handlePuntoFijo() {
     const {columns, data} = metodoPuntoFijo();
     this.setState({ columns: columns, data: data });
+
   }
 
   handleNewtonRaphson = () => {
