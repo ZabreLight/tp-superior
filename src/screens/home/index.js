@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import HomeLayout from './layout';
-import { metodoNewtonRaphson, metodoPuntoFijo } from './utils'
+import {metodoBiseccion, metodoNewtonRaphson, metodoPuntoFijo} from './utils';
+import {columns} from './constants';
 
 class HomeContainer extends Component {
- state = { data: [] };
+ state = {
+     columns: columns,
+     data: []
+ };
 
-  handleBiseccion() {
+  handleBiseccion = () => {
+    const { columns, data } = metodoBiseccion();
+    this.setState({ columns, data });
+  };
 
-  }
 
   handlePuntoFijo = () => {
-    const data = metodoPuntoFijo();
-    this.setState({ data });
-  }
+    const {columns, data} = metodoPuntoFijo();
+    this.setState({ columns,data });
+  };
 
   handleNewtonRaphson = () => {
-    const data = metodoNewtonRaphson();
-    this.setState({ data });
-  }
+    const {columns, data} = metodoNewtonRaphson();
+    this.setState({ columns,data });
+  };
 
   render() {
     return (
@@ -25,6 +31,7 @@ class HomeContainer extends Component {
         handleBiseccion={this.handleBiseccion}
         handlePuntoFijo={this.handlePuntoFijo}
         handleNewtonRaphson={this.handleNewtonRaphson}
+        columns={this.state.columns}
         data={this.state.data}
       />
     );
