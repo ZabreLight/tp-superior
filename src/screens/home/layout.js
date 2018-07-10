@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import ReactTable from "react-table";
 
 import logo from './assets/logo.svg';
-import { columns } from './constants';
 
 import 'react-table/react-table.css'
 import './styles.css';
 
-function HomeLayout({handleBiseccion, handlePuntoFijo, handleNewtonRaphson, data}){
+function HomeLayout({handleBiseccion, handlePuntoFijo, handleNewtonRaphson, data, columns}){
     return (
       <div className="App">
         <header className="App-header">
