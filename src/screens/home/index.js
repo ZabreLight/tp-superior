@@ -11,20 +11,19 @@ class HomeContainer extends Component {
 
   handleBiseccion = () => {
     const { columns, data } = metodoBiseccion();
-    this.setState({ columns: columns, data: data });
+    this.setState({ columns, data });
   };
 
 
-  handlePuntoFijo() {
+  handlePuntoFijo = () => {
     const {columns, data} = metodoPuntoFijo();
-    this.setState({ columns: columns, data: data });
-
-  }
+    this.setState({ columns,data });
+  };
 
   handleNewtonRaphson = () => {
     const {columns, data} = metodoNewtonRaphson();
-    this.setState({ columns: columns, data: data });
-  }
+    this.setState({ columns,data });
+  };
 
   render() {
     return (

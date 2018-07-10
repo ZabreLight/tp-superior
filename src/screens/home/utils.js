@@ -15,9 +15,13 @@ export function metodoNewtonRaphson(iteracion = 0, xnAnterior = 20.5, resultados
     const xn = ecNewtonRaphson(xnAnterior);
     const error = Math.abs(xn - xnAnterior);
     const resultado = { xn, iteracion, xnAnterior, error}
+
     resultados.push(resultado);
-    if (error > 10**(-5)) return metodoNewtonRaphson(iteracion + 1, xn, resultados);
-    return {columns: columns, data:resultados};
+
+    if (error > 10**(-5))
+        return metodoNewtonRaphson(iteracion + 1, xn, resultados);
+
+    return {columns, data:resultados};
 }
 
 /* PASOS NEWTON RAPHSON
@@ -31,8 +35,11 @@ export function metodoPuntoFijo(iteracion = 0, xnAnterior = 20.5, resultados = [
     const error = Math.abs(xn - xnAnterior) / Math.abs(xn);
     const resultado = { xn, iteracion, xnAnterior, error}
     resultados.push(resultado);
-    if (error > 10**(-5)) return metodoPuntoFijo(iteracion + 1, xn, resultados);
-    return {columns: columns, data:resultados};
+
+    if (error > 10**(-5))
+        return metodoPuntoFijo(iteracion + 1, xn, resultados);
+
+    return {columns, data: resultados};
 }
 
 /* PASOS PUNTO FIJO
@@ -41,14 +48,13 @@ export function metodoPuntoFijo(iteracion = 0, xnAnterior = 20.5, resultados = [
  3. Criterio de paro: Error relativo Con un error menor a 10**(-5)
 */
 
-
 export function metodoBiseccion(iteracion = 0, extremoInicial = 20, extremoFinal = 21, xnAnterior = 0, resultados = []) {
     const xn = (extremoInicial + extremoFinal) / 2;
     const fa = ecuacion(extremoInicial);
     const fb = ecuacion(extremoFinal);
     const fXn = ecuacion(xn);
     const error = Math.abs(fXn);
-    // resultados.push({xn, iteracion, xnAnterior, error});
+
     resultados.push({iteracion, extremoInicial, extremoFinal, xn, fa, fb,fXn, error, xnAnterior })
 
     if (error > 10**(-5)) {
@@ -69,7 +75,7 @@ export function metodoBiseccion(iteracion = 0, extremoInicial = 20, extremoFinal
     return {columns: columnsBiseccion, data: resultados};
 }
 
-//PASOS BISECCION
+/*PASOS BISECCION
 //1. Determinar intervalo donde varie el signo de f(x) [20,21]
 //2. Hallar Xn (a + b)/2
-//3. Criterio de paro: Valor cercano a 0, con un error menor a 10**(-5)
+3. Criterio de paro: Valor cercano a 0, con un error menor a 10**(-5)*/
